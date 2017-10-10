@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#20000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#20FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/createoffer_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Offer name"
+                android:singleLine="true"/>
+            <EditText
+                android:id="@+id/createoffer_min"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Min cost"
+                android:singleLine="true"
+                android:inputType="number"/>
+            <EditText
+                android:id="@+id/createoffer_max"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Max cost"
+                android:singleLine="true"
+                android:inputType="number"/>
+            <EditText
+                android:id="@+id/createoffer_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Quantity"
+                android:singleLine="true"
+                android:inputType="number"/>
+
+            <EditText
+                android:id="@+id/createoffer_desc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Description"/>
+
+            <CheckBox
+                android:id="@+id/createoffer_requestable"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Requestable"
+                android:gravity="center"
+                android:checked="true"/>
+
+            </LinearLayout>
+
+                        <!-- for images ,,, complete it later-->
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            </ListView>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/createoffer_save"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:text="Save"/>
+            <Button
+                android:id="@+id/createoffer_delete"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Delete"/>
+            </LinearLayout>
+    </LinearLayout>
+</ScrollView>

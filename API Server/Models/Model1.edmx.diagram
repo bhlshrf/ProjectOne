@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9a7a3c640dc41139f38480962eb6a1e" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="Project1Model.service" Width="1.5" PointX="8.375" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project1Model.user_details" Width="1.5" PointX="3.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project1Model.user" Width="1.5" PointX="7.875" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="Project1Model.FK_user_details_users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Project1Model.offer" Width="1.5" PointX="3.125" PointY="5.875" />
+        <AssociationConnector Association="Project1Model.FK_offers_services" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="Project1Model.FK_services_users" ManuallyRouted="true" >
+          <ConnectorPoint PointX="8.6668701171875" PointY="4.0090950520833326" />
+          <ConnectorPoint PointX="8.6668701171875" PointY="6" />
+        </AssociationConnector>
+        <AssociationConnector Association="Project1Model.favorites" ManuallyRouted="true" >
+          <ConnectorPoint PointX="9.08343505859375" PointY="6" />
+          <ConnectorPoint PointX="9.08343505859375" PointY="4.0090950520833326" />
+        </AssociationConnector>
+        <AssociationConnector Association="Project1Model.friends" ></AssociationConnector>
+        <AssociationConnector Association="Project1Model.offer_like1" ></AssociationConnector>
+        <EntityTypeShape EntityType="Project1Model.offer_images" Width="1.5" PointX="5.75" PointY="7.625" />
+        <AssociationConnector Association="Project1Model.FK_sd_images_offers" />
+        <EntityTypeShape EntityType="Project1Model.service_images" Width="1.5" PointX="11" PointY="6.375" />
+        <AssociationConnector Association="Project1Model.FK_service_images_services" />
+        <EntityTypeShape EntityType="Project1Model.request" Width="1.5" PointX="0.75" PointY="6.125" />
+        <AssociationConnector Association="Project1Model.FK_requstes_offers11" />
+        <AssociationConnector Association="Project1Model.FK_requstes_users1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

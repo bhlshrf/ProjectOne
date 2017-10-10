@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/rgstscrollview"
+              android:focusable="true"
+              android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:padding="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sign Up"
+
+            android:textColor="#ffffffff"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:padding="20dp"
+            android:gravity="center"/>
+
+    <LinearLayout
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtRgstUsername"
+            android:hint="username"
+            android:singleLine="true"
+            android:textColor="#ffffffff"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="password"
+            android:id="@+id/txtRgstPasswrod"
+            android:singleLine="true"
+            android:textColor="#ffffffff"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="confirm password"
+            android:id="@+id/txtRgstPasswrodConfirm"
+            android:singleLine="true"
+            android:textColor="#ffffffff"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="16dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="first name"
+            android:id="@+id/txtRgstFname"
+            android:singleLine="true"
+            android:textColor="#ffffffff"/>
+
+        <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="last name"
+        android:id="@+id/txtRgstLname"
+        android:singleLine="true"
+        android:textColor="#ffffffff"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Service Provider"
+            android:id="@+id/chkbxRgstServiceProv"
+            android:layout_gravity="center"
+            android:checked="false"
+            android:gravity="center"
+            android:textColor="#ffffffff"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:id="@+id/lblRgstConnecting"
+                android:textColor="#ffffffff"
+                android:textSize="15dp"
+                android:padding="10dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ok"
+                android:id="@+id/btnRgstOK">
+                <requestFocus/>
+                </Button>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

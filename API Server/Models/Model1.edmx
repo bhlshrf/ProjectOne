@@ -1,0 +1,715 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Project1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="favorites">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="friends">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="friend_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="friend_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="offer_images">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="offer_id" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="offer_like">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="offer_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="offers">
+          <Key>
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="offer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="min_cost" Type="int" />
+          <Property Name="max_cost" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="requestable" Type="bit" />
+        </EntityType>
+        <EntityType Name="requests">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="offer_id" Type="int" Nullable="false" />
+          <Property Name="requestDate" Type="date" />
+          <Property Name="response" Type="varchar" MaxLength="150" />
+          <Property Name="responseDate" Type="date" />
+          <Property Name="responseMassage" Type="varchar" MaxLength="150" />
+          <Property Name="requsetMassage" Type="varchar" MaxLength="150" />
+          <Property Name="rating" Type="int" />
+          <Property Name="comment" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="service_images">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="services">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="laititude" Type="float" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="url" Type="varchar" MaxLength="500" />
+          <Property Name="class" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="user_details">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="150" />
+          <Property Name="birthdate" Type="date" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_favorites_services">
+          <End Role="services" Type="Self.services" Multiplicity="1" />
+          <End Role="favorites" Type="Self.favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="services">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="favorites">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorites_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="favorites" Type="Self.favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="favorites">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="friends" Type="Self.friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_users1">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="friends" Type="Self.friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="friend_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offer_like_offers">
+          <End Role="offers" Type="Self.offers" Multiplicity="1" />
+          <End Role="offer_like" Type="Self.offer_like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offers">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="offer_like">
+              <PropertyRef Name="offer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offer_like_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="offer_like" Type="Self.offer_like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="offer_like">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_offers_services">
+          <End Role="services" Type="Self.services" Multiplicity="1" />
+          <End Role="offers" Type="Self.offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="services">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="offers">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requstes_offers1">
+          <End Role="offers" Type="Self.offers" Multiplicity="1" />
+          <End Role="requests" Type="Self.requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offers">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="offer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requstes_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="requests" Type="Self.requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sd_images_offers">
+          <End Role="offers" Type="Self.offers" Multiplicity="1" />
+          <End Role="offer_images" Type="Self.offer_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offers">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="offer_images">
+              <PropertyRef Name="offer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_images_services">
+          <End Role="services" Type="Self.services" Multiplicity="1" />
+          <End Role="service_images" Type="Self.service_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="services">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="service_images">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_services_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="services" Type="Self.services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="services">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_details_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="user_details" Type="Self.user_details" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_details">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project1ModelStoreContainer">
+          <EntitySet Name="favorites" EntityType="Self.favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="friends" EntityType="Self.friends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="offer_images" EntityType="Self.offer_images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="offer_like" EntityType="Self.offer_like" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="offers" EntityType="Self.offers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="requests" EntityType="Self.requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="service_images" EntityType="Self.service_images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="services" EntityType="Self.services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_details" EntityType="Self.user_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_favorites_services" Association="Self.FK_favorites_services">
+            <End Role="services" EntitySet="services" />
+            <End Role="favorites" EntitySet="favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorites_users" Association="Self.FK_favorites_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="favorites" EntitySet="favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_users" Association="Self.FK_friends_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_users1" Association="Self.FK_friends_users1">
+            <End Role="users" EntitySet="users" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offer_like_offers" Association="Self.FK_Offer_like_offers">
+            <End Role="offers" EntitySet="offers" />
+            <End Role="offer_like" EntitySet="offer_like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offer_like_users" Association="Self.FK_Offer_like_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="offer_like" EntitySet="offer_like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_offers_services" Association="Self.FK_offers_services">
+            <End Role="services" EntitySet="services" />
+            <End Role="offers" EntitySet="offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requstes_offers1" Association="Self.FK_requstes_offers1">
+            <End Role="offers" EntitySet="offers" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requstes_users" Association="Self.FK_requstes_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sd_images_offers" Association="Self.FK_sd_images_offers">
+            <End Role="offers" EntitySet="offers" />
+            <End Role="offer_images" EntitySet="offer_images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_images_services" Association="Self.FK_service_images_services">
+            <End Role="services" EntitySet="services" />
+            <End Role="service_images" EntitySet="service_images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_services_users" Association="Self.FK_services_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="services" EntitySet="services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_details_users" Association="Self.FK_user_details_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="user_details" EntitySet="user_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Project1Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="laititude" Type="Double" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="class" Type="Byte" />
+          <NavigationProperty Name="offers" Relationship="Project1Model.FK_offers_services" FromRole="service" ToRole="offer" />
+          <NavigationProperty Name="owner" Relationship="Project1Model.FK_services_users" FromRole="service" ToRole="user" />
+          <NavigationProperty Name="usersliked" Relationship="Project1Model.favorites" FromRole="service" ToRole="user" />
+          <NavigationProperty Name="service_images" Relationship="Project1Model.FK_service_images_services" FromRole="service" ToRole="service_images" />
+        </EntityType>
+        <EntityType Name="user_details">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="birthdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_details_users" FromRole="user_details" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user_details" Relationship="Self.FK_user_details_users" FromRole="users" ToRole="user_details" />
+          <NavigationProperty Name="services" Relationship="Project1Model.FK_services_users" FromRole="user" ToRole="service" />
+          <NavigationProperty Name="favorite" Relationship="Project1Model.favorites" FromRole="user" ToRole="service" />
+          <NavigationProperty Name="follows" Relationship="Project1Model.friends" FromRole="user" ToRole="user1" />
+          <NavigationProperty Name="followers" Relationship="Project1Model.friends" FromRole="user1" ToRole="user" />
+          <NavigationProperty Name="offer_like" Relationship="Project1Model.offer_like1" FromRole="user" ToRole="offer" />
+          <NavigationProperty Name="requests" Relationship="Project1Model.FK_requstes_users1" FromRole="user" ToRole="request" />
+        </EntityType>
+        <Association Name="FK_user_details_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="user_details" Type="Self.user_details" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_details">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="services" EntityType="Self.service" />
+          <EntitySet Name="user_details" EntityType="Self.user_details" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_user_details_users" Association="Self.FK_user_details_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="user_details" EntitySet="user_details" />
+          </AssociationSet>
+          <EntitySet Name="offers" EntityType="Project1Model.offer" />
+          <AssociationSet Name="FK_offers_services" Association="Project1Model.FK_offers_services">
+            <End Role="service" EntitySet="services" />
+            <End Role="offer" EntitySet="offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_services_users" Association="Project1Model.FK_services_users">
+            <End Role="user" EntitySet="users" />
+            <End Role="service" EntitySet="services" />
+          </AssociationSet>
+          <AssociationSet Name="favorites" Association="Project1Model.favorites">
+            <End Role="service" EntitySet="services" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="friends" Association="Project1Model.friends">
+            <End Role="user" EntitySet="users" />
+            <End Role="user1" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="offer_like1" Association="Project1Model.offer_like1">
+            <End Role="offer" EntitySet="offers" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <EntitySet Name="offer_images" EntityType="Project1Model.offer_images" />
+          <AssociationSet Name="FK_sd_images_offers" Association="Project1Model.FK_sd_images_offers">
+            <End Role="offer" EntitySet="offers" />
+            <End Role="offer_images" EntitySet="offer_images" />
+          </AssociationSet>
+          <EntitySet Name="service_images" EntityType="Project1Model.service_images" />
+          <AssociationSet Name="FK_service_images_services" Association="Project1Model.FK_service_images_services">
+            <End Role="service" EntitySet="services" />
+            <End Role="service_images" EntitySet="service_images" />
+          </AssociationSet>
+          <EntitySet Name="requests" EntityType="Project1Model.request" />
+          <AssociationSet Name="FK_requstes_offers11" Association="Project1Model.FK_requstes_offers11">
+            <End Role="offer" EntitySet="offers" />
+            <End Role="request" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requstes_users1" Association="Project1Model.FK_requstes_users1">
+            <End Role="user" EntitySet="users" />
+            <End Role="request" EntitySet="requests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="offer">
+          <Key>
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="offer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="min_cost" Type="Int32" />
+          <Property Name="max_cost" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="service" Relationship="Project1Model.FK_offers_services" FromRole="offer" ToRole="service" />
+          <NavigationProperty Name="usersliked" Relationship="Project1Model.offer_like1" FromRole="offer" ToRole="user" />
+          <NavigationProperty Name="offer_images" Relationship="Project1Model.FK_sd_images_offers" FromRole="offer" ToRole="offer_images" />
+          <Property Name="requestable" Type="Boolean" />
+          <NavigationProperty Name="requests" Relationship="Project1Model.FK_requstes_offers11" FromRole="offer" ToRole="request" />
+        </EntityType>
+        <Association Name="FK_offers_services">
+          <End Type="Project1Model.service" Role="service" Multiplicity="1" />
+          <End Type="Project1Model.offer" Role="offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="offer">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_services_users">
+          <End Type="Project1Model.user" Role="user" Multiplicity="1" />
+          <End Type="Project1Model.service" Role="service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="service">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="favorites">
+          <End Type="Project1Model.service" Role="service" Multiplicity="*" />
+          <End Type="Project1Model.user" Role="user" Multiplicity="*" />
+        </Association>
+        <Association Name="friends">
+          <End Type="Project1Model.user" Role="user" Multiplicity="*" />
+          <End Type="Project1Model.user" Role="user1" Multiplicity="*" />
+        </Association>
+        <Association Name="offer_like1">
+          <End Type="Project1Model.offer" Role="offer" Multiplicity="*" />
+          <End Type="Project1Model.user" Role="user" Multiplicity="*" />
+        </Association>
+        <EntityType Name="offer_images">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="None" />
+          <Property Name="offer_id" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="offer" Relationship="Project1Model.FK_sd_images_offers" FromRole="offer_images" ToRole="offer" />
+        </EntityType>
+        <Association Name="FK_sd_images_offers">
+          <End Type="Project1Model.offer" Role="offer" Multiplicity="1" />
+          <End Type="Project1Model.offer_images" Role="offer_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offer">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="offer_images">
+              <PropertyRef Name="offer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="service_images">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="service" Relationship="Project1Model.FK_service_images_services" FromRole="service_images" ToRole="service" />
+        </EntityType>
+        <Association Name="FK_service_images_services">
+          <End Type="Project1Model.service" Role="service" Multiplicity="1" />
+          <End Type="Project1Model.service_images" Role="service_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="service_images">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="offer_id" Type="Int32" Nullable="false" />
+          <Property Name="requestDate" Type="DateTime" Precision="0" />
+          <Property Name="response" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="responseDate" Type="DateTime" Precision="0" />
+          <Property Name="responseMassage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="requsetMassage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="rating" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="offer" Relationship="Project1Model.FK_requstes_offers11" FromRole="request" ToRole="offer" />
+          <NavigationProperty Name="user" Relationship="Project1Model.FK_requstes_users1" FromRole="request" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_requstes_offers11">
+          <End Type="Project1Model.offer" Role="offer" Multiplicity="1" />
+          <End Type="Project1Model.request" Role="request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offer">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="offer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requstes_users1">
+          <End Type="Project1Model.user" Role="user" Multiplicity="1" />
+          <End Type="Project1Model.request" Role="request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Project1ModelStoreContainer" CdmEntityContainer="Project1Entities">
+          <EntitySetMapping Name="services">
+            <EntityTypeMapping TypeName="Project1Model.service">
+              <MappingFragment StoreEntitySet="services">
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="laititude" ColumnName="laititude" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_details">
+            <EntityTypeMapping TypeName="Project1Model.user_details">
+              <MappingFragment StoreEntitySet="user_details">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="Project1Model.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="offers">
+            <EntityTypeMapping TypeName="Project1Model.offer">
+              <MappingFragment StoreEntitySet="offers">
+                <ScalarProperty Name="requestable" ColumnName="requestable" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="max_cost" ColumnName="max_cost" />
+                <ScalarProperty Name="min_cost" ColumnName="min_cost" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="offer_id" ColumnName="offer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="favorites" TypeName="Project1Model.favorites" StoreEntitySet="favorites">
+            <EndProperty Name="user">
+              <ScalarProperty Name="user_id" ColumnName="user_id" />
+            </EndProperty>
+            <EndProperty Name="service">
+              <ScalarProperty Name="service_id" ColumnName="service_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="friends" TypeName="Project1Model.friends" StoreEntitySet="friends">
+            <EndProperty Name="user1">
+              <ScalarProperty Name="user_id" ColumnName="friend_id" />
+            </EndProperty>
+            <EndProperty Name="user">
+              <ScalarProperty Name="user_id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="offer_like1" TypeName="Project1Model.offer_like1" StoreEntitySet="offer_like">
+            <EndProperty Name="user">
+              <ScalarProperty Name="user_id" ColumnName="user_id" />
+            </EndProperty>
+            <EndProperty Name="offer">
+              <ScalarProperty Name="offer_id" ColumnName="offer_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="offer_images">
+            <EntityTypeMapping TypeName="Project1Model.offer_images">
+              <MappingFragment StoreEntitySet="offer_images">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="offer_id" ColumnName="offer_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="service_images">
+            <EntityTypeMapping TypeName="Project1Model.service_images">
+              <MappingFragment StoreEntitySet="service_images">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requests">
+            <EntityTypeMapping TypeName="Project1Model.request">
+              <MappingFragment StoreEntitySet="requests">
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="requsetMassage" ColumnName="requsetMassage" />
+                <ScalarProperty Name="responseMassage" ColumnName="responseMassage" />
+                <ScalarProperty Name="responseDate" ColumnName="responseDate" />
+                <ScalarProperty Name="response" ColumnName="response" />
+                <ScalarProperty Name="requestDate" ColumnName="requestDate" />
+                <ScalarProperty Name="offer_id" ColumnName="offer_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
