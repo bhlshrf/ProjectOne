@@ -6,7 +6,8 @@ The Impelmentation consists of two parts:
 
 1 - Android app for both advertisers (to publish and manage the services and offers) and clients (to search and request the services and offers)
 
-2 - RESTful API for back end, implements using ASP.NET Api 2 with C#.
+2 - RESTful API for backend operations, implements using ASP.NET Api 2 with C# and EntityFramework.
+
 
 
 # Workflow:
@@ -15,8 +16,10 @@ The Impelmentation consists of two parts:
 
 
 
+
 # To see the demo in action:
 https://www.youtube.com/watch?v=dSoHMzsk3Lg
+
 
 # For more information:
 You may want to see the 'Report.pdf' and 'Presentation.pptx'.
