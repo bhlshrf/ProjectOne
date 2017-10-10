@@ -12,7 +12,7 @@ The Impelmentation consists of two parts:
 
 # Workflow:
 
-![alt text](https://raw.githubusercontent.com/bhlshrf/ProjectOne/master/workflow.jpg)
+![the workflow of the system](https://raw.githubusercontent.com/bhlshrf/ProjectOne/master/workflow.jpg)
 
 
 
